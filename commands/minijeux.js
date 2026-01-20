@@ -1,24 +1,31 @@
-const { SlashCommandBuilder, StringSelectMenuBuilder, ActionRowBuilder } = require("discord.js");
-const { startMorpion, startDuel, startReaction } = require("../games/gameLauncher");
+const { 
+  SlashCommandBuilder, 
+  ActionRowBuilder, 
+  StringSelectMenuBuilder 
+} = require("discord.js");
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("minijeux")
-        .setDescription("Lancer un mini-jeu"),
+  data: new SlashCommandBuilder()
+    .setName("minijeux")
+    .setDescription("Ouvre le panel des mini-jeux"),
 
-    async execute(interaction) {
+  async execute(interaction) {
 
-        const menu = new StringSelectMenuBuilder()
-            .setCustomId("select_minijeu")
-            .setPlaceholder("Choisis ton mini-jeu")
-            .addOptions([
-                { label: "Morpion", value: "morpion", description: "Joue au Morpion" },
-                { label: "Duel", value: "duel", description: "Joue au Duel" },
-                { label: "Réaction rapide", value: "reaction", description: "Teste ta rapidité" }
-            ]);
+    const menu = new StringSelectMenuBuilder()
+      .setCustomId("minijeux_select_game")
+      .setPlaceholder("Sélectionne un mini-jeu")
+      .addOptions([
+        { label: "Morpion", value: "morpion" },
+        { label: "Duel", value: "duel" },
+        // tu peux ajouter d'autres mini-jeux ici
+      ]);
 
-        const row = new ActionRowBuilder().addComponents(menu);
+    const row = new ActionRowBuilder().addComponents(menu);
 
-        await interaction.reply({ content: "🎮 Choisis un mini-jeu :", components: [row], ephemeral: true });
-    }
+    await interaction.reply({
+      content: "🎮 **Choisis un mini-jeu pour commencer :**",
+      components: [row],
+      ephemeral: true
+    });
+  }
 };
