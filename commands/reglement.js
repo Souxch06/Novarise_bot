@@ -3,38 +3,30 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('reglement')
-        .setDescription('Afficher le règlement du serveur'),
-    async execute(interaction){
+        .setDescription('Affiche le règlement'),
+
+    async execute(interaction) {
         const embed = new EmbedBuilder()
-            .setTitle("📜 Règlement du serveur NovaRise")
+            .setTitle('📜 Règlement')
             .setDescription(`
 **🤝 Respect**
 • Respect obligatoire envers tous
-• Aucun propos toxique ou discriminatoire
+• Aucun propos toxique
 
 **👤 Pseudo**
-• Pseudo Discord conforme à Clash of Clans
-• Pseudo lisible et correct
+• Conforme à Clash of Clans
 
 **💬 Salons**
-• Respect du thème des salons
-• Pas de spam ni de publicité
-
-**⚔️ Clan**
-• Participation aux guerres si inscrit
-• Respect des consignes d’attaque
+• Pas de spam ni pub
 
 **🚫 Interdictions**
-• Triche, cheats, exploits
-• Contenu NSFW ou illégal
+• Triche, NSFW, illégal
 
 **⚠️ Sanctions**
-• Avertissement → Mute → Ban
+• Warn → Mute → Ban
+`)
+            .setColor(0x3498db);
 
-🔔 *En restant sur le serveur, vous acceptez ce règlement.*
-            `)
-            .setColor(0xf1c40f);
-
-        await interaction.reply({ embeds:[embed], ephemeral:false });
+        await interaction.reply({ embeds: [embed] });
     }
 };
